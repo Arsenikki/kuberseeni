@@ -13,7 +13,7 @@ spec:
     git: https://github.com/Arsenikki/kuberseeni.git
     path: vernemq
   values:
-    replicaCount: 2
+    replicaCount: 4
     image:
       repository: timbrand/vernemq-rpi
       tag: 1.10.2
