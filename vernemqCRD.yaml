@@ -1,0 +1,20 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: vernemq
+---
+apiVersion: helm.fluxcd.io/v1
+kind: HelmRelease
+metadata:
+  name: podinfo
+  namespace: vernemq
+spec:
+  chart:
+    repository: https://vernemq.github.io/docker-vernemq
+    name: vernemq
+    version: 1.6.2
+  values:
+    image:
+      repository: timbrand/vernemq-rpi
+      tag: 1.10.2
+    
