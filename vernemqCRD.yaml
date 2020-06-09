@@ -7,13 +7,14 @@ apiVersion: helm.fluxcd.io/v1
 kind: HelmRelease
 metadata:
   name: vernemq
+  req: master
   namespace: vernemq
 spec:
   chart:
-    git: https://github.com/Arsenikki/kuberseeni.git
+    git: git@github.com:Arsenikki/kuberseeni
     path: vernemq
   values:
-    replicaCount: 3
+    replicaCount: 2
     image:
       repository: timbrand/vernemq-rpi
       tag: 1.10.2
