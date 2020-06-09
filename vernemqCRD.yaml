@@ -6,15 +6,14 @@ metadata:
 apiVersion: helm.fluxcd.io/v1
 kind: HelmRelease
 metadata:
-  name: podinfo
+  name: vernemq
   namespace: vernemq
 spec:
   chart:
-    repository: https://vernemq.github.io/docker-vernemq
-    name: vernemq
-    version: 1.6.2
+    git: https://github.com/Arsenikki/kuberseeni.git
+    path: vernemq
   values:
+    replicaCount: 2
     image:
       repository: timbrand/vernemq-rpi
       tag: 1.10.2
-    
