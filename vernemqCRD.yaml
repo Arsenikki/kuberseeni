@@ -14,7 +14,7 @@ spec:
     git: git@github.com:Arsenikki/kuberseeni
     path: vernemq
   values:
-    replicaCount: 5
+    replicaCount: 1
     image:
       repository: timbrand/vernemq-rpi
       tag: 1.10.2
