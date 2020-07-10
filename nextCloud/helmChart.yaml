@@ -1,0 +1,8 @@
+apiVersion: helm.cattle.io/v1
+kind: HelmChart
+metadata:
+  name: nextcloud
+  namespace: kube-system
+spec:
+  chart: stable/nextcloud
+  targetNamespace: kube-system
