@@ -1,7 +1,7 @@
 apiVersion: helm.cattle.io/v1
 kind: HelmChart
 metadata:
-  name: metallb
+  name: metallii
   namespace: kube-system
 spec:
   chart: stable/metallb
