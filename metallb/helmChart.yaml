@@ -5,7 +5,7 @@ metadata:
   namespace: kube-system
 spec:
   chart: stable/metallb
-  targetNamespace: metallb-system
+  targetNamespace: kube-system
   set:
     configInline:
       address-pools:
