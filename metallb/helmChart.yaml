@@ -6,7 +6,7 @@ metadata:
 spec:
   chart: stable/metallb
   targetNamespace: kube-system
-  set:
+  valuesContent: |-
     configInline:
       address-pools:
       - name: default
