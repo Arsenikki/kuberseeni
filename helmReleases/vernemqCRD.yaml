@@ -18,5 +18,7 @@ spec:
     image:
       repository: timbrand/vernemq-rpi
       tag: 1.10.2
+    persistentVolume:
+      enabled: true
     serviceMonitor:
       create: true
