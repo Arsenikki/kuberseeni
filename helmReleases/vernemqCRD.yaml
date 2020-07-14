@@ -11,7 +11,7 @@ metadata:
   namespace: vernemq
 spec:
   chart:
-    git: git@github.com:Arsenikki/kuberseeni
+    git: git@github.com:Arsenikki/kuberseeni/helmReleases
     path: vernemq
   values:
     replicaCount: 4
