@@ -18,3 +18,5 @@ spec:
     image:
       repository: timbrand/vernemq-rpi
       tag: 1.10.2
+    serviceMonitor:
+      create: true
