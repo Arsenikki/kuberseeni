@@ -11,10 +11,10 @@ metadata:
   namespace: vernemq
 spec:
   chart:
-    git: git@github.com:Arsenikki/kuberseeni/helmReleases
+    git: git@github.com:Arsenikki/kuberseeni
     path: vernemq
   values:
-    replicaCount: 4
+    replicaCount: 3
     image:
       repository: timbrand/vernemq-rpi
       tag: 1.10.2
