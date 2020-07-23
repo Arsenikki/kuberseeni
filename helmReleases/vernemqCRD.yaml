@@ -19,7 +19,7 @@ spec:
       repository: timbrand/vernemq-rpi
       tag: 1.10.2
     persistentVolume:
-      enabled: 
+      enabled: true
     statefulset:
       podAnnotations:
         prometheus.io/scrape: "true"
