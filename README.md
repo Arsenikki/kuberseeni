@@ -1,4 +1,4 @@
-# kuberseeni
+# Edge computing cluster with Industrial IoT capabilities
 This project is created as a part of my master's thesis and it was used to evaluate a proof of concept industrial IoT edge computing system, which is based on k3s Kubernetes distribution. The main features are listed below: 
 
 1. Automated Kubernetes cluster initialization using Ansible, which handles:
