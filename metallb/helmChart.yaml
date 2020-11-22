@@ -1,20 +1,25 @@
-apiVersion: v1
-kind: Namespace
-metadata:
-  name: metallb
----
 apiVersion: helm.cattle.io/v1
 kind: HelmChart
 metadata:
   name: metallb
   namespace: kube-system
 spec:
-  chart: stable/metallb
-  targetNamespace: metallb
+  repo:  
+  chart: bitnami/metallb
   valuesContent: |-
-    configInline:
+    configInline: 
       address-pools:
-      - name: default
+      - name: default-cluster-pool
         protocol: layer2
         addresses:
-          - 192.168.1.120-192.168.1.129
+        - 192.168.1.120-192.168.1.129
+    controller:
+      image:
+        registry: docker.io
+        repository: metallb/controller
+        tag: v0.9.5-arm64
+    speaker:
+      image:
+        registry: docker.io
+        repository: bitnami/metallb-speaker
+        tag: 0.9.5-arm64
