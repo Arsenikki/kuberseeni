@@ -4,7 +4,7 @@ metadata:
   name: metallb
   namespace: kube-system
 spec:
-  repo:  
+  repo: https://charts.bitnami.com/bitnami
   chart: bitnami/metallb
   valuesContent: |-
     configInline: 
