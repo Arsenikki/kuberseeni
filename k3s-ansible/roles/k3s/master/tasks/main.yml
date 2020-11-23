@@ -1,9 +1,5 @@
 ---
 
-- name: change master node hostname
-  hostname:
-    name: "master"
-
 - name: Copy K3s service file
   register: k3s_service
   template:
@@ -53,6 +49,7 @@
     path: ~{{ ansible_user }}/.kube
     state: directory
     owner: "{{ ansible_user }}"
+    mode: "u=rwx,g=rx,o="
 
 - name: Copy config file to user home directory
   copy:
@@ -60,8 +57,9 @@
     dest: ~{{ ansible_user }}/.kube/config
     remote_src: yes
     owner: "{{ ansible_user }}"
+    mode: "u=rw,g=,o="
 
-- name: Replace https://localhost:6443 by https://master-pi:6443
+- name: Replace https://localhost:6443 by https://master-ip:6443
   command: >-
     k3s kubectl config set-cluster default
       --server=https://{{ master_ip }}:6443
@@ -80,7 +78,12 @@
     dest: /usr/local/bin/crictl
     state: link
 
-- name: Download MetalLB HelmChart CRD for automatic installation
+# - name: Download MetalLB HelmChart CRD for automatic installation
+#   get_url:
+#     url: https://raw.githubusercontent.com/Arsenikki/kuberseeni/master/k3s-post-install/metallb.yaml
+#     dest: /var/lib/rancher/k3s/server/manifests/metallb.yaml
+
+- name: Download system-upgrade-controller for automatic installation
   get_url:
-    url: https://raw.githubusercontent.com/Arsenikki/kuberseeni/master/metallb/helmChart.yaml
-    dest: /var/lib/rancher/k3s/server/manifests/metal.yaml
+    url: https://raw.githubusercontent.com/Arsenikki/kuberseeni/master/k3s-post-install/system-upgrade-controller-with-plans.yaml
+    dest: /var/lib/rancher/k3s/server/manifests/system-upgrade-controller-with-plans.yaml

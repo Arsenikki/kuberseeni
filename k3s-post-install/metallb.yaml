@@ -1,3 +1,4 @@
+## Current k3s helm controller doesn't work with bitnami repo. Not able to find chart in repo.
 apiVersion: helm.cattle.io/v1
 kind: HelmChart
 metadata:
