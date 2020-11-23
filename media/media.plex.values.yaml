@@ -1,0 +1,33 @@
+claimToken: # Replace `<CLAIM_TOKEN>` by the token obtained previously.
+
+image:
+  repository: linuxserver/plex
+  tag: arm64v8-latest
+  pullPolicy: IfNotPresent
+
+kubePlex:
+  enabled: false # kubePlex (transcoder job) is disabled because not available on ARM. The transcoding will be performed by the main Plex instance instead of a separate Job.
+
+timezone: Europe/Helsinki
+
+service:
+  type: LoadBalancer # We will use a LoadBalancer to obtain a virtual IP that can be exposed to Plex Media via our router
+  port: 32400 # Port to expose Plex
+
+rbac:
+  create: true
+
+nodeSelector: {}
+
+persistence:
+  transcode:
+    claimName: media-hdd
+  data:
+    claimName: media-hdd
+  config:
+    claimName: media-hdd
+
+resources: {}
+podAnnotations: {}
+proxy:
+  enable: false

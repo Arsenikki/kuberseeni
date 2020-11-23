@@ -1,0 +1,53 @@
+replicaCount: 1
+
+image:
+  repository: gjeanmart/jackettvpn # Special image to use Jackett over a VPN
+  tag: latest-armhf
+  pullPolicy: IfNotPresent
+
+env:
+  - name: VPN_ENABLED
+    value: "yes" # Enable Jackett over VPN
+  - name: VPN_USERNAME
+    valueFrom:
+      secretKeyRef: # Reference to the secret | openvpn.username
+        name: "openvpn"
+        key: "username"
+  - name: VPN_PASSWORD
+    valueFrom:
+      secretKeyRef: # Reference to the secret | openvpn.password
+        name: "openvpn"
+        key: "password"
+  - name: LAN_NETWORK
+    value: "192.168.0.0/24"
+  - name: CREATE_TUN_DEVICE
+    value: "true" # Needed for VPN
+  - name: PUID
+    value: "1000"
+  - name: PGID
+    value: "1000"
+
+service:
+  type: ClusterIP
+  port: 80
+
+volumes:
+  - name: "media-hdd"
+    persistentVolumeClaim:
+      claimName: "media-hdd" # PersistentVolumeClaim created earlier
+  - name: "dev-tun"  # Needed for VPN
+    hostPath:
+      path: "/dev/net/tun"
+
+volumeMounts:
+  - name: "media-hdd"
+    mountPath: "/config"
+    subPath: "configs/jackett" # Path /mnt/hdd/configs/jackett where jackett writes the configuration
+  - name: "media-hdd"
+    mountPath: "/downloads"
+    subPath: "downloads/jackett" # Path /mnt/hdd/downloads/jackett ???
+
+securityContext:
+  capabilities: # Needed for VPN
+    add:
+      - NET_ADMIN

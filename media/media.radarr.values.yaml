@@ -1,0 +1,32 @@
+replicaCount: 1
+
+image:
+  repository: linuxserver/radarr
+  tag: arm32v7-latest # ARM image
+  pullPolicy: IfNotPresent
+
+env:
+  - name: PUID
+    value: 1000
+  - name: PGID
+    value: 1000
+
+service:
+  type: ClusterIP
+  port: 80
+
+volumes:
+  - name: media-hdd
+    persistentVolumeClaim:
+      claimName:  media-hdd # PersistentVolumeClaim created earlier
+
+volumeMounts:
+  - name: media-hdd
+    mountPath: /config
+    subPath: configs/radarr # Path /mnt/hdd/configs/radarr where radarr writes the configuration
+  - name: media-hdd
+    mountPath: /downloads/transmission
+    subPath: downloads/transmission # Path /mnt/hdd/downloads/transmission where radarr picks up downloaded movies
+  - name: media-hdd
+    mountPath: /movies
+    subPath: library/movies # Path /mnt/hdd/library/movies where radarr moves and renames the movies

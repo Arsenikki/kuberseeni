@@ -1,0 +1,32 @@
+replicaCount: 1
+
+image:
+  repository: linuxserver/sonarr
+  tag: arm32v7-latest # ARM image
+  pullPolicy: IfNotPresent
+
+env:
+  - name: PUID
+    value: "1000"
+  - name: PGID
+    value: "1000"
+
+service:
+  type: ClusterIP
+  port: 80
+
+volumes:
+  - name: media-hdd
+    persistentVolumeClaim:
+      claimName: "media-hdd" # PersistentVolumeClaim created earlier
+
+volumeMounts:
+  - name: media-hdd
+    mountPath: "/config"
+    subPath: "configs/sonarr" # Path /mnt/hdd/configs/sonarr where sonarr writes the configuration
+  - name: media-hdd
+    mountPath: "/downloads/transmission"
+    subPath: "downloads/transmission" # Path /mnt/hdd/downloads/transmission where sonarr picks up downloaded episodes
+  - name: media-hdd
+    mountPath: "/tv"
+    subPath: "library/tv" # Path /mnt/hdd/library/tv where sonarr moves and renames the episodes
